@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.shadowed {
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, .1);
+}
+
+ul {
+    list-style: disc;
+    padding: 0 20px;
+}
