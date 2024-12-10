@@ -24,6 +24,7 @@ const Client: ClientFC = ({
 
     const selected = !!targetClients.find((client: ClientData) => client.id === data.id);
 
+    //Выбор клиента по нажатию Enter
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key === 'Enter' && focused) {
@@ -39,12 +40,15 @@ const Client: ClientFC = ({
     }, [focused, selected, handler]);
 
     const deleteHandler = () => {
-        removeClient(data.id);
-        router.push('?loading=true');
-        setTimeout(() => {
-            router.push('/')
-            router.refresh()
-        }, 1000)
+        const confirmAction = window.confirm('Вы уверены? Это действие нельзя отменить.');
+        if (confirmAction) {
+            removeClient(data.id);
+            router.push('?loading=true');
+            setTimeout(() => {
+                router.push('/')
+                router.refresh()
+            }, 1000)
+        }
     }
 
     return (

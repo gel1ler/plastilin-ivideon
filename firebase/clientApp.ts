@@ -61,3 +61,21 @@ export async function changeClientsStatus(newHasComeClients: ClientData[], newOu
 
     return true
 }
+
+export const denyAll = () => {
+    const usersRef = ref(db, 'clients'); // Ссылка на коллекцию пользователей
+    get(usersRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            const users = snapshot.val();
+            Object.keys(users).forEach((userId) => {
+                if (users[userId].email !== 'botneva02@gmail.com') { // Проверяем, что пользователь не админ
+                    update(child(usersRef, userId), {
+                        hasCome: false // Устанавливаем доступ в false
+                    });
+                }
+            });
+        }
+    }).catch((error) => {
+        console.error('Ошибка при обновлении прав:', error);
+    });
+};

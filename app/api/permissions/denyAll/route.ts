@@ -1,11 +1,10 @@
 import { NextResponse } from "next/server"
-import { start } from "./services/start"
+import { start } from "../services/start"
 import { Browser, Page } from "puppeteer"
-import { denyPermissions, grantPermissions } from "./services/permissions"
+import { denyAllPermissions } from "../services/permissions";
 
 export async function POST(req: Request) {
     try {
-        const { grantedEmails, deniedEmails } = await req.json()
         console.log('[STARTED]')
         const result = await start();
 
@@ -16,16 +15,8 @@ export async function POST(req: Request) {
             })
 
         const { page, browser }: { page: Page, browser: Browser } = result
-        if (grantedEmails?.length > 0) {
-            console.log('grant starts')
-            await grantPermissions(page, grantedEmails);
-        }
-
-        if (deniedEmails?.length > 0) {
-            console.log('deny starts')
-            await denyPermissions(page, deniedEmails);
-        }
-
+        console.log('deny all starts')
+        await denyAllPermissions(page)
         await browser.close();
 
         return NextResponse.json({
