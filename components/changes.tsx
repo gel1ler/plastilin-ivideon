@@ -1,14 +1,12 @@
 import { changeClientsStatus } from '@/firebase/clientApp'
 import { ClientData } from '@/types'
-import { Box, Button, CircularProgress, List, ListItem, ListItemText, Typography } from '@mui/material'
-import React, { SetStateAction, useEffect, useState } from 'react'
-import DoneIcon from '@mui/icons-material/Done';
-import Loading from './loading';
+import { Box, Button, Typography } from '@mui/material'
+import React, { SetStateAction, useEffect } from 'react'
 
 const Changes = ({
   newHasComeClients, newOutClients, setLoading, setFinished
 }: {
-  newHasComeClients: ClientData[], newOutClients: ClientData[], setLoading: React.Dispatch<SetStateAction<boolean>>, setFinished:React.Dispatch<SetStateAction<boolean>>
+  newHasComeClients: ClientData[], newOutClients: ClientData[], setLoading: React.Dispatch<SetStateAction<boolean>>, setFinished: React.Dispatch<SetStateAction<boolean>>
 }) => {
 
 

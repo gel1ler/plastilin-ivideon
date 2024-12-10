@@ -1,9 +1,10 @@
+import { initializeApp } from "firebase/app";
+// import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { ClientData } from "@/types"
-import { initializeApp } from "firebase/app"
 import { getDatabase, ref, set, update, child, get, remove } from "firebase/database"
 
 const firebaseConfig = {
-    apiKey: process.env.API_KEY,
+    apiKey: process.env.NEXT_PUBLIC_API_KEY,
     authDomain: "plastilin-b7867.firebaseapp.com",
     databaseURL: "https://plastilin-b7867-default-rtdb.europe-west1.firebasedatabase.app",
     projectId: "plastilin-b7867",
@@ -11,9 +12,18 @@ const firebaseConfig = {
     messagingSenderId: "26760354406",
     appId: "1:26760354406:web:9f918f9d19950e7c222ba7",
     measurementId: "G-CHVJX8GMWS"
-}
+};
 
-initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
+// const auth = getAuth(app);
+
+// if (auth) {
+//     // Вход
+//     signInWithEmailAndPassword(auth, process.env.NEXT_PUBLIC_FB_EMAIL!, process.env.NEXT_PUBLIC_FB_PASSWORD!)
+//         .catch((error) => {
+//             console.error("Login error:", error);
+//         });
+// }
 
 const db = getDatabase()
 const dbRef = ref(db);
